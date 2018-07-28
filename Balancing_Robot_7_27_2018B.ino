@@ -228,15 +228,15 @@
 #include "MeEncoderMotor.h"
 #include "MeEncoderNew.h"
 #include "MeBuzzer.h"
-#include "MeLEDMatrix.h"
-#include "MeHumitureSensor.h"
-#include "MeFlameSensor.h"
-#include "MeGasSensor.h"
-#include "MeEncoderOnBoard.h"
-#include "MeMegaPiDCMotor.h"
-#include "MePressureSensor.h"
-#include "MePS2.h"
-#include "MeColorSensor.h"
+//#include "MeLEDMatrix.h"
+//#include "MeHumitureSensor.h"
+//#include "MeFlameSensor.h"
+//#include "MeGasSensor.h"
+//#include "MeEncoderOnBoard.h"
+//#include "MeMegaPiDCMotor.h"
+//#include "MePressureSensor.h"
+//#include "MePS2.h"
+//#include "MeColorSensor.h"
 /*********************  MegaPi Board GPIO Map *********************************/                 //    //                                                                               
 // struct defined in MeMegaPi.h                                                                  //    //                                                                                
 #define PORT1B  PORT_9                                                                           //    //                                                                               
@@ -250,8 +250,7 @@
    { NC, NC },{ NC, NC },                                                                        //    //                                                                              
  };                                                                                              //    //                                                                                 
                                                                                                  //    //                                                                                                                   
-Encoder_port_type encoder_Port[6] =                                                            //    // 'Encoder_port_type' does not name a type                                                                                
-                                                                                                 //    //                                                                                                                            
+/*Encoder_port_type encoder_Port[6] =                                                            //    // 'Encoder_port_type' does not name a type                                                                                
 {                                                                                                //    //                                                                                                                            
   { NC,     NC,     NC,     NC,     NC},                                                         //    //                                                                                                                            
   //NET2    NET1    PWM     DIR1    DIR2                                                         //    //                                                                                                                          
@@ -262,7 +261,7 @@ Encoder_port_type encoder_Port[6] =                                             
   { 2,      A1,     5,      A4,     A5},                                                         //    //                                                                                                                                
   { NC,     NC,     NC,     NC,     NC},                                                         //    //                                                                                                                              
 };                                                                                               //    //                                                                                                                          
-                                                                                               //    //                                                                                                                                  
+*/                                                                                               //    //                                                                                                                                  
                                                                                                  //    //                                                                                                                                     
 megapi_dc_type megapi_dc_Port[14] =                                                              //    // 'megapi_dc_type' does not name a type                                                                                                     
 {                                                                                                //    //                                                                                                                                    
