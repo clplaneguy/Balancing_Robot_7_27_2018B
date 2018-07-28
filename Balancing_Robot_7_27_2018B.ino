@@ -201,12 +201,12 @@
 #include "MeMegaPiDCMotor.h"                                       Encoder port type does not name a type              Needed                                                            
                                                                                                  //    //                                                                                              
 // Supported Modules drive needs to be added here
-#include "Me7SegmentDisplay.h"
-#include "MeUltrasonicSensor.h"
-#include "MeDCMotor.h"
-#include "MeRGBLed.h"
-#include "Me4Button.h"
-#include "MePotentiometer.h"
+//#include "Me7SegmentDisplay.h"
+//#include "MeUltrasonicSensor.h"
+//#include "MeDCMotor.h"
+//#include "MeRGBLed.h"
+//#include "Me4Button.h"
+//#include "MePotentiometer.h"
 //#include "MeJoystick.h"
 //#include "MePIRMotionSensor.h"
 //#include "MeShutter.h"
