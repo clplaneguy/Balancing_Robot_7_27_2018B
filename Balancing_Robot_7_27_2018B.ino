@@ -508,8 +508,7 @@ void setpin(uint8_t AD0, uint8_t INT)                                           
 }                                     MeGyrocpp Block                                                                                                       
 
 #endif                               MeGyrocpp Compiler directive                                                              // #endif without #if                                                                                                                                           
-                                                                                                                                                                               
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////                                                                                           
+                                                                                                                                                                                                                
 /**                                                                                                          //                                                                                                                                                            
  * \par Function                                                                                             //                                                                                                                               
  *   getAngleX                                                                                               //                                                                                                              
@@ -525,11 +524,10 @@ void setpin(uint8_t AD0, uint8_t INT)                                           
  *   X-axis angle value is calculated by complementary filter.                                               //                                                                                                                  
  */                                                                                                          //                                                                                                                                                                                     
 //double MeGyro::getAngleX(void)                                                                             //                                                                                                              
-double GyroGetAngleX(void)                                                                                   //                                                                                                                   
+double GyroGetAngleX(void)                                                                                       //                                                                                                                   
 {                                                                                                            //                                                                                                                                                      
   return gx;                                                                                                 //                                                                                                                                                     
 }                                                                                                            //                                                                                                           
-                                                                                                             //                         
                                                                                                              //                                                                                                                                          
 /**                                                                                                          //                                                                                                                       
  * \par Function                                                                                             //                                                                                                                      
@@ -546,12 +544,12 @@ double GyroGetAngleX(void)                                                      
  *   Z-axis angle value is integral of Z-axis angular velocity.                                              //                                                                                                                  
  */                                                                                                          //                                                                                                                      
 //double MeGyro::getAngleZ(void)                                                                             //                                                                                                                     
-double GyroGetAngleZ(void)                                                                                   //                                                                                                                       
+double GyroGetAngleZ(void)                                                                                       //                                                                                                                       
 {                                                                                                            //                                                                                                                          
   return gz;                                                                                                 //                                                                                                                  
 }                                                                                                            //                                                                                                                     // From MeGyro.cpp // From MeGyro.cpp
-                                                                                                             //                                                                       
-                                                                                                             //                                               
+                                                                                                                                                                                    
+
 /**                                                                                                          //                                                                                                      
  * \par Function                                                                                             //                                                                                                   
  *   readData                                                                                                //                                                                                                 
@@ -648,9 +646,7 @@ int8_t writeData(uint8_t start, const uint8_t *pData, uint8_t size)             
   Wire.write(pData, size);                                                                                   //                                                                                        
   return_value = Wire.endTransmission(true);                                                                 //                                                                                      
   return(return_value); //return: no error                                                                   //                                                                                         
-}                                                                                                            //                                 
-                                                                                                             //                               
-                                                                                                             //                                                                                      
+}                                                                                                            //                                                                                    
 /**                                                                                                          //                                                                         
  * \par Function                                                                                             //                                                                         
  *   update                                                                                                  //                                                                       
@@ -748,44 +744,12 @@ void GyroBegin(){                                                               
   delay(200);                                                                                                //                                                                                                         
   //writeReg(0x6b, 0x00);//close the sleep mode                                                              //                                                                                                                                            
   delay(100);                                                                                                //                                                                                                                      
-  GyroWriteReg(0x1a, 0x01);//configurate the digital low pass filter                                           //                                                                     
-  GyroWriteReg(0x1b, 0x08);//set the gyro scale to 500 deg/s                                                   //                                                                                                 
+  //writeReg(0x1a, 0x01);//configurate the digital low pass filter                                           //                                                                     
+  //writeReg(0x1b, 0x08);//set the gyro scale to 500 deg/s                                                   //                                                                                                 
   delay(100);                                                                                                //                                                                                                                       
   GyroCalibration();                                                                                         //   'deviceCalibration' was not declared in this scope                                                                         
 }                                                                                                            //                                                                                                              
-                                                                                                             //        
-/**                                                                                                          //          
- * \par Function                                                                                             //              
- *   writeReg                                                                                                //             
- * \par Description                                                                                          //       
- *   Write the registor of i2c device.                                                                       //                
- * \param[in]                                                                                                //                
- *   reg - the address of registor.                                                                          //                      
- * \param[in]                                                                                                //             
- *   data - the data that will be written to the registor.                                                   //                                                      
- * \par Output                                                                                               //                    
- *   None                                                                                                    //                 
- * \return                                                                                                   //                     
- *   Return the error code.                                                                                  //                       
- *   the definition of the value of variable return_value:                                                   //                                                              
- *   0:success                                                                                               //                                              
- *   1:BUFFER_LENGTH is shorter than size                                                                    //                                    
- *   2:address send, nack received                                                                           //                  
- *   3:data send, nack received                                                                              //                
- *   4:other twi error                                                                                       //                        
- *   refer to the arduino official library twi.c                                                             //                                                         
- * \par Others                                                                                               //                                           
- *   To set the registor for initializing.                                                                   //                                       
- */                                                                                                          //                                
-//int8_t MeGyro::writeReg(int16_t reg, uint8_t data)                                                           //                                                          
-int8_t GyroWriteReg(int16_t reg, uint8_t data)                                                           //                                                          
-{                                                                                                            //                          
-  int8_t return_value = 0;                                                                                   //                                       
-  return_value = writeData(reg, &data, 1);                                                                   //                                       
-  return(return_value);                                                                                      //                                 
-}                                                                                                            //                        
-                                                                                                             //                                  
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////                                                                                                                                               
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////                                                                                                                                              
                                                                                                                                                                                                       
                                                                                                                                                                                                         
 void setup() {    //////////////////////////////////////////////////////////////////                                                                                                                                                                                                                            
@@ -847,12 +811,11 @@ void loop()      {    //////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////    //                                                                                                                                                                   
                                                                                                   //                                                                                                                                                                         
                                                                                                   //                                                                                                                                         
-  //gyro.update();                                                                                  //                                                                                                                                                                                            
-  GyroUpdate();                                                                                  //                                                                                                                                                                                            
+  gyro.update();                                                                                  //                                                                                                                                                                                            
                                                                                                   //                                                                                                                                                                                   
   //Serial.read();                                                                                //                                                                                                                                                                                                         
   Serial.print("loop      ");                                                                     //                                                                                                                                                                                       
-  Pitch = GyroGetAngleX();                                                                       // Arduino defines Pitch as rotation about the x axis                                                              From MeGyr oTest                                                                               
+  Pitch = gyro.getAngleX();                                                                       // Arduino defines Pitch as rotation about the x axis                                                              From MeGyr oTest                                                                               
   Serial.print("\t      Pitch:\t");  Serial.print(Pitch);                                         //                                                                                                                 From MeGyroTest                                                                 
   //HorizontalAngle = Pitch;                                                                      //                                                                                                                                                                                           
   Serial.print("\t        Pitch is "); Serial.print(Pitch);                                       //                                                                                                                                                                                                   
