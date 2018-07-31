@@ -1225,7 +1225,8 @@ int8_t writeData(uint8_t start, const uint8_t *pData, uint8_t size)             
 */                                                                                                                                                                                                                                                                                                                                                            // From MeGyro.cpp
 }
 #endif                               MeGyrocpp                                                                                                                                                                                                   
-                                                                                                                                                                                                                
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////                                                                                                                                                                                                                                                                                                                                                              
 /**                                                                                                          //                                                                         
  * \par Function                                                                                             //                                                                         
  *   update                                                                                                  //                                                                       
@@ -1247,7 +1248,7 @@ void update(void)                                                               
   {                                                                                                          //                                                                         
   static unsigned long  last_time = 0;                                                                       //                                                                                     
   int8_t return_value;                                                                                       //                                                                   
-  double dt, filter_coefficient;                                                                             //       'filter_coefficient' does not name a type                                                                                         
+  double dt, filter_coefficient;                                                                             // 'filter_coefficient' does not name a type                                                                                         
   /* read imu data */                                                                                        //                                                                                                                                    
 //  return_value = readData(0x3b, i2cData, 14);                                                              //                                                     
   if(return_value != 0)                                                                                      //                                                           
@@ -1255,7 +1256,7 @@ void update(void)                                                               
     return;                                                                                                  //                                                                                                             
   }                                                                                                          //                                                                                        
                                                                                                              //                                                                                              
-    double ax, ay, az;                                                                                       //  'ax' was not declared in this scope                                                               
+    double ax, ay, az;                                                                                       // 'ax' was not declared in this scope                                                               
   /* assemble 16 bit sensor data */                                                                          //                                                                                         
   accX = ( (i2cData[0] << 8) | i2cData[1] );                                                                 //                                                                                                             
   accY = ( (i2cData[2] << 8) | i2cData[3] );                                                                 //                                                                                         
