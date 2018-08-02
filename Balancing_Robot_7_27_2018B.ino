@@ -753,7 +753,9 @@ MeGyro::MeGyro(uint8_t port, uint8_t address) : MePort(port)                    
 //  Device_Address = address;                                                                          //    //                                                                                                            
 //}                                                                                                    //    //                                                                                                          
 /////////////////////////////////////////////////////////////////////////////////////////////////////////    //                                                                                                  
+
 #else  // ME_PORT_DEFINED                                                                                    //                                                                                                                                                                                                                                
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////    //                                                                                                                                                                                                                                    // From MeGyro.cpp
                                                                                                        //    //                                                                                           
 /**                                                                                                    //    //                                                                                          
@@ -796,6 +798,7 @@ void setpin(uint8_t AD0, uint8_t INT)                                           
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////                                           
 */                                                                                                                                                                                                                                                                                                                                                            // From MeGyro.cpp
 }
+
 #endif                               MeGyrocpp                                                                                                                                                                                                   
                                                                                                                                                         
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////                                                                                                                                                                                                                                                      
@@ -827,7 +830,7 @@ void GyroUpdate(void)                                                           
   {                                                                                                          //                                                                                                           
     return;                                                                                                  //                                                                        
   }                                                                                                          //                                                                            
-                                                                                                             //                                                                                                                                                                                                                                                                                            
+                                                                                                             //                                                                                                                                                                                                                                                  
   double ax, ay, az;                                                                                         //                                                                   
   /* assemble 16 bit sensor data */                                                                          //                                                                                     
   accX = ( (i2cData[0] << 8) | i2cData[1] );                                                                 //                                                                                
@@ -1137,7 +1140,7 @@ void GyroDeviceCalibration(void)                                                
 int8_t writeReg(int16_t reg, uint8_t data)                                                                   //                                                                                                
 {                                                                                                            //                                                                                             
   int8_t return_value = 0;                                                                                   //                                                                                                  
-  //return_value = writeData(reg, &data, 1);                                                                 //                                                                                                   
+  return_value = writeData(reg, &data, 1);                                                                   //                                                                                                  
   return(return_value);                                                                                      //                                                                                                      
 }                                                                                                            //                                                                                                     
                                                                                                              //                                                                                                     
@@ -1276,10 +1279,10 @@ void GyroBegin(){                                                               
   gyrZoffs = 0;                                                                                              //                                                                                    
   Wire.begin();                                                                                              //                                                                                       
   delay(200);                                                                                                //                                                                                                             
-  //writeReg(0x6b, 0x00);//close the sleep mode                                                              //                                                                                                                                                  
+  writeReg(0x6b, 0x00);//close the sleep mode                                                                //                                                                                                                                                  
   delay(100);                                                                                                //                                                                                                                          
-  //writeReg(0x1a, 0x01);//configurate the digital low pass filter                                           //                                                                         
-  //writeReg(0x1b, 0x08);//set the gyro scale to 500 deg/s                                                   //                                                                                                     
+  writeReg(0x1a, 0x01);//configurate the digital low pass filter                                             //                                                                         
+  writeReg(0x1b, 0x08);//set the gyro scale to 500 deg/s                                                     //                                                                                                     
   delay(100);                                                                                                //                                                                                                                           
   GyroCalibration();                                                                                         // 'deviceCalibration' was not declared in this scope                                                                           
 }                                                                                                            //                                                                                                                                                
@@ -1299,7 +1302,7 @@ void GyroBegin(){                                                               
  *   X-axis angle value is calculated by complementary filter.                                               //                                                                                                                  
  */                                                                                                          //                                                                                                                                                                                     
 //double MeGyro::getAngleX(void)                                                                             //                                                                                                              
-double GyroGetAngleX(void)                                                                                       //                                                                                                                   
+double GyroGetAngleX(void)                                                                                   //                                                                                                                   
 {                                                                                                            //                                                                                                                                                      
   return gx;                                                                                                 //                                                                                                                                                     
 }                                                                                                            //                                                                                                           
@@ -1319,11 +1322,11 @@ double GyroGetAngleX(void)                                                      
  *   Y-axis angle value is calculated by complementary filter.                                               //                                                                                                                
  */                                                                                                          //                                                                                                                             
 //double MeGyro::getAngleY(void)                                                                             //                                                                                                                    
-double GyroGetAngleY(void)                                                                                       //                                                                                                                           
+double GyroGetAngleY(void)                                                                                   //                                                                                                                           
 {                                                                                                            //                                                                                                                                                      
   return gy;                                                                                                 //                                                                                                                                                   
 }                                                                                                            //                                                                                                                       
-                                                                                                             //                                                                                                                                                                                                                                          // From MeGyro.cpp        
+                                                                                                             //                                                                                                                                                                                                                                          // From MeGyro.cpp
                                                                                                              //                                                                                                                  
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////                                                                                                                                                                                                       
                                                                                                                                                                                                          
@@ -1334,7 +1337,7 @@ void setup()                                                                    
                                                                                                                                                                                                   
   {    /////////////////////////////////////////////////////////////////////////////                                                                                                                                                                                                                              
   Serial.begin(115200);                                                           // Start the serial port at 115200 kbps                                                                                                                                                      
-  //gyro.begin();                                                                   //                                                                                                                                                                                       
+  //gyro.begin();                                                                 //                                                                                                                                                                                       
                                                                                   //                                                                                                                                                                                     
   #ifdef DEBUG                                                                    //                                                                                                                                                                                       
   int Count = 0;                                                                  //                                                                                                                                                                                       
@@ -1357,40 +1360,40 @@ void setup()                                                                    
   Serial.print(    "PORT1B is "); Serial.print  (PORT1B);                         // 'PORT1B' was not declared in this scope                                                                                                                                      
                                                                                   //                                              From MegaPi DC Motor Demo MAM                                                                                                                                          
   Serial.print("    PORT2B is "); Serial.println(PORT2B);                         //                                                                                                                                    From MegaPi DC Motor Demo MAM                             
-  //gyro.begin();                                                                   //                                                                                                                                                                                                        
-  //GyroBegin();                                                                    //                                                                                                                                                                                                        
-  
-  //void MeGyro::begin(void)
-{
-  gSensitivity = 65.5; //for 500 deg/s, check data sheet
-  gx = 0;
-  gy = 0;
-  gz = 0;
-  gyrX = 0;
-  gyrY = 0;
-  gyrZ = 0;
-  accX = 0;
-  accY = 0;
-  accZ = 0;
-  gyrXoffs = 0;
-  gyrYoffs = 0;
-  gyrZoffs = 0;
-  Wire.begin();
-  delay(200);
-  writeReg(0x6b, 0x00);//close the sleep mode
-  delay(100);
-  writeReg(0x1a, 0x01);//configurate the digital low pass filter
-  writeReg(0x1b, 0x08);//set the gyro scale to 500 deg/s
-  delay(100);
-  //deviceCalibration();
-}
-
-delay(5);                                                                       //                                                                                                                                                                  
-  gyro.update();                                                                //                                                                                                                                                                                                           
-  //Serial.read();                                                                //                                                                                                                                                                                        
-  Serial.print("loop      ");                                                     //                                                                                                                                                                                                     
-  //Pitch = gyro.getAngleX();                                                       // Arduino defines Pitch as rotation about the x axis                                                                              From MeGyroTest                                                              
-  Pitch = GyroGetAngleX();                                                       // Arduino defines Pitch as rotation about the x axis                                                                              From MeGyroTest                                                                 
+  gyro.begin();                                                                 //                                                                                                                                                                                                        
+  GyroBegin();                                                                    //                                                                                                                                                                                                                    
+                                                                                  //                                                         
+  //void MeGyro::begin(void)                                                      //                                        
+{                                                                                 //                    
+  gSensitivity = 65.5; //for 500 deg/s, check data sheet                          //                              
+  gx = 0;                                                                         //                             
+  gy = 0;                                                                         //                                 
+  gz = 0;                                                                         //                                                                                                           
+  gyrX = 0;                                                                       //                                                
+  gyrY = 0;                                                                       //                    
+  gyrZ = 0;                                                                       //                            
+  accX = 0;                                                                       //                                         
+  accY = 0;                                                                       //                           
+  accZ = 0;                                                                       //                        
+  gyrXoffs = 0;                                                                   //                                                                               
+  gyrYoffs = 0;                                                                   //                                                                                                                                   
+  gyrZoffs = 0;                                                                   //                                                                                   
+  Wire.begin();                                                                   //                                                                           
+  delay(200);                                                                     //                                                        
+  writeReg(0x6b, 0x00);//close the sleep mode                                     //                                             
+  delay(100);                                                                     //                          
+  writeReg(0x1a, 0x01);//configurate the digital low pass filter                  //                                                  
+  writeReg(0x1b, 0x08);//set the gyro scale to 500 deg/s                          //                                                  
+  delay(100);                                                                     //                             
+  GyroDeviceCalibration();                                                        //                                                
+}                                                                                 //                                
+                                                                                  //                           
+delay(5);                                                                         //                                                                                                                                                                                                                        
+  gyro.update();                                                                  //                                                                                                                                                                                                                                             
+  //Serial.read();                                                                //                                                                                                                                                                                                                
+  Serial.print("loop      ");                                                     //                                                                                                                                                                                                                                
+  //Pitch = gyro.getAngleX();                                                     // Arduino defines Pitch as rotation about the x axis                                                                              From MeGyroTest                                                                                                       
+  Pitch = GyroGetAngleX();                                                        // Arduino defines Pitch as rotation about the x axis                                                                              From MeGyroTest                                                                 
   //Serial.print("X:");                                                           //                                                                                                                                 From MeGyroTest                                                                   
   //Serial.print(gyro.getAngleX() );                                              //                                                                                                                                 From MeGyroTest                                                      
   //Serial.print(" Y:");                                                          //                                                                                                                                 From MeGyroTest                                                              
@@ -1417,7 +1420,7 @@ void loop()                                                                     
                                                                                                   //                                                                                                                                                                         
                                                                                                   //                                                                                                                                         
   gyro.update();                                                                                  //                                                                                                                                                                                            
-  //GyroUpdate();                                                                                  //                                                                                                                                                                                            
+  //GyroUpdate();                                                                                 //                                                                                                                                                                                            
                                                                                                   //                                                                                                                                                                                   
   //Serial.read();                                                                                //                                                                                                                                                                                                         
   Serial.print("loop      ");                                                                     //                                                                                                                                                                                       
